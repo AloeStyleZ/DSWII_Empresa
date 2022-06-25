@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.empresa.entity.Empresa;
 
-public interface AlumnoRepository extends JpaRepository<Empresa, Integer>{
+public interface EmpresaRepository extends JpaRepository<Empresa, Integer>{
 	
 	
 	public List<Empresa> findByDni(String dni);
