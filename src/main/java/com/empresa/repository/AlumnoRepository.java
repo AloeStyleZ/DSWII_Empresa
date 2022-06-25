@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.empresa.entity.Alumno;
+import com.empresa.entity.Empresa;
 
-public interface AlumnoRepository extends JpaRepository<Alumno, Integer>{
+public interface AlumnoRepository extends JpaRepository<Empresa, Integer>{
 	
 	
-	public List<Alumno> findByDni(String dni);
+	public List<Empresa> findByDni(String dni);
 	
 
 }

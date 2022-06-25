@@ -10,27 +10,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.empresa.entity.Alumno;
-import com.empresa.service.AlumnoService;
+import com.empresa.entity.Empresa;
+import com.empresa.service.EmpresaService;
 
 @RestController
-@RequestMapping("/rest/alumnno")
-public class AlumnoController {
+@RequestMapping("/rest/empresa")
+public class EmpresaController {
 	
 	@Autowired
-	private AlumnoService service;
+	private EmpresaService service;
 	
 	@GetMapping
 	@ResponseBody
-	public ResponseEntity<List<Alumno>> listaTodosAlumnos(){
+	public ResponseEntity<List<Empresa>> listaTodosAlumnos(){
 		return ResponseEntity.ok(service.listaTodos());
 	}
 	
-	@GetMapping("/{dni}")
-	@ResponseBody
-	public ResponseEntity<List<Alumno>> listaPorDni(@PathVariable String dni){
-		return ResponseEntity.ok(service.listaPorDni(dni));
-	}
-	
-	
+
 }
