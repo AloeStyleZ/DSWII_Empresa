@@ -19,4 +19,24 @@ public class EmpresaServiceImpl implements EmpresaService {
 		return repository.findAll();
 	}
 
+	@Override
+	public Empresa insertaActualizaEmpresa(Empresa obj) {
+		return repository.save(obj);
+	}
+
+	@Override
+	public List<Empresa> listaEmpresaPorRuc(String ruc) {
+		return repository.findByRuc(ruc);
+	}
+
+	@Override
+	public List<Empresa> listaEmpresaPorNombre(String nombre) {
+		return repository.findByNombre(nombre);
+	}
+
+	@Override
+	public List<Empresa> listaEmpresaPorRucAndNombre(String nombre, String ruc) {
+		return repository.listaRucAndNombre(nombre, ruc);
+	}
+
 }
