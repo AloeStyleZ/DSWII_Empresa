@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -50,7 +51,16 @@ public class EmpresaController {
 	@GetMapping("/porNombreRuc/{nombre}/{ruc}")
 	@ResponseBody
 	public ResponseEntity<List<Empresa>> listaTodasEmpresasPorNombreAndRuc(@PathVariable(name = "nombre") String nombre, @PathVariable(name = "ruc") String ruc){
-		List<Empresa> lista = empresaService.listaEmpresaPorRucAndNombre(ruc, nombre);
+		List<Empresa> lista = empresaService.listaEmpresaPorRucAndNombre(ruc, nombre+"%");
+		return ResponseEntity.ok(lista);
+	}
+	
+	@GetMapping("/porNombreRucConParametros")
+	@ResponseBody
+	public ResponseEntity<List<Empresa>> listaEmpresaRucOrNombre(
+			@RequestParam(name = "nombre", required = false, defaultValue = "") String nombre,
+			@RequestParam(name = "nombre", required = false, defaultValue = "") String ruc){
+		List<Empresa> lista = empresaService.listaEmpresaPorRucOrNombre(ruc, nombre+"%");
 		return ResponseEntity.ok(lista);
 	}
 	

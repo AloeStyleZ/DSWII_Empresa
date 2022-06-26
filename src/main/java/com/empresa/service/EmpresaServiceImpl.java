@@ -38,5 +38,10 @@ public class EmpresaServiceImpl implements EmpresaService {
 	public List<Empresa> listaEmpresaPorRucAndNombre(String nombre, String ruc) {
 		return repository.listaRucAndNombre(nombre, ruc);
 	}
+	
+	@Override
+	public List<Empresa> listaEmpresaPorRucOrNombre(String nombre, String ruc) {
+		return repository.listaRucAndNombre(nombre, ruc);
+	}
 
 }
