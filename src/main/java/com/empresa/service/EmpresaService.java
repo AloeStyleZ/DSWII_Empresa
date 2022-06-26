@@ -13,5 +13,6 @@ public interface EmpresaService {
 	public abstract List<Empresa> listaEmpresaPorRuc(String ruc);
 	public abstract List<Empresa> listaEmpresaPorNombre(String nombre);
 	public abstract List<Empresa> listaEmpresaPorRucAndNombre(String nombre, String ruc);
+	public abstract List<Empresa> listaEmpresaPorRucOrNombre(String nombre, String ruc);
 	
 }
