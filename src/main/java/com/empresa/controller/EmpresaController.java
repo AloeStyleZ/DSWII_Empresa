@@ -55,7 +55,7 @@ public class EmpresaController {
 		return ResponseEntity.ok(lista);
 	}
 	
-	@GetMapping("/porNombreRucConParametros")
+	@GetMapping("/porNombreOrRuconParametros")
 	@ResponseBody
 	public ResponseEntity<List<Empresa>> listaEmpresaRucOrNombre(
 			@RequestParam(name = "nombre", required = false, defaultValue = "") String nombre,
