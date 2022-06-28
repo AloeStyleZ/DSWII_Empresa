@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.empresa.entity.Empresa;
 import com.empresa.service.EmpresaService;
 
+
 @RestController
 @RequestMapping("/rest/empresa")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -28,6 +29,7 @@ public class EmpresaController {
 	@Autowired
 	private EmpresaService empresaService;
 	
+	
 	@GetMapping
 	@ResponseBody
 	public ResponseEntity<List<Empresa>> listaTodasEmpresas(){
@@ -35,39 +37,44 @@ public class EmpresaController {
 		return ResponseEntity.ok(lista);
 	}
 	
-	@GetMapping("/porRuc/{ruc}")
+	
+	
+	@GetMapping("/porRaSocialRuc/{razonSocial}/{ruc}")
 	@ResponseBody
-	public ResponseEntity<List<Empresa>> listaTodasEmpresasPorRuc(@PathVariable(name = "ruc") String ruc){
-		List<Empresa> lista = empresaService.listaEmpresaPorRuc(ruc+"%");
+	public ResponseEntity<List<Empresa>> listaTodasEmpresasPorRaSocialAndRuc(@PathVariable(name = "razonSocial") String razonSocial, @PathVariable(name = "ruc") String ruc){
+		List<Empresa> lista = empresaService.listaEmpresaPorRucAndRaSocial(ruc, razonSocial+"%");
 		return ResponseEntity.ok(lista);
 	}
 	
-	@GetMapping("/porRaSocial/{raSocial}")
+	/*@GetMapping("/listaClientePorNombresLike/{filtro}")
 	@ResponseBody
-	public ResponseEntity<List<Empresa>> listaTodasEmpresasPorRaSocial(@PathVariable(name = "raSocial") String raSocial){
-		List<Empresa> lista = empresaService.listaEmpresaPorRaSocial(raSocial+"%");
-		return ResponseEntity.ok(lista);
-	}
-	
-	@GetMapping("/porRaSocialRuc/{raSocial}/{ruc}")
-	@ResponseBody
-	public ResponseEntity<List<Empresa>> listaTodasEmpresasPorRaSocialAndRuc(@PathVariable(name = "raSocial") String raSocial, @PathVariable(name = "ruc") String ruc){
-		List<Empresa> lista = empresaService.listaEmpresaPorRucAndRaSocial(ruc, raSocial+"%");
-		return ResponseEntity.ok(lista);
-	}
-	
+
+	public ResponseEntity<List<Cliente>> consulta(@PathVariable("filtro")String filtro){
+		List<Cliente> salida = null;
+				try { 
+					if (filtro.equals("todos")) {
+						salida = ClienteService.listaClientePorNombresLike("%");
+					}else {
+					salida = ClienteService.listaClientePorNombresLike("%"+filtro+"%");
+				    }
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return ResponseEntity.ok(salida);
+	}*/
+
 	
 	@GetMapping("/porRucRaSocialUbigeoPaisConParametros")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> listaPorRucRaSocialUbigeoConParametros(
-			@RequestParam(name = "raSocial", required = false, defaultValue = "") String raSocial,
+			@RequestParam(name = "razonSocial", required = false, defaultValue = "") String razonSocial,
 			@RequestParam(name = "ruc", required = false, defaultValue = "") String ruc,
 			@RequestParam(name = "idUbigeo", required = false, defaultValue = "-1") int idUbigeo,
 			@RequestParam(name = "idPais", required = false, defaultValue = "-1") int idPais)
 	{		
 		Map<String, Object> salida = new HashMap<String, Object>();
 		try {
-			List<Empresa> lista = empresaService.listaEmpresaPorRaSocialRucUbigeoPais(ruc,"%"+raSocial+"%",idUbigeo,idPais);
+			List<Empresa> lista = empresaService.listaEmpresaPorRaSocialRucUbigeoPais(ruc,"%"+razonSocial+"%",idUbigeo,idPais);
 			if (CollectionUtils.isEmpty(lista)) {
 				salida.put("mensaje","No existe elementos para la consulta");
 				

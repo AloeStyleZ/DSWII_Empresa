@@ -29,7 +29,7 @@ public class Empresa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idEmpresa;
-	private String raSocial;
+	private String razonSocial;
 	private String gerente;
 	private String ruc;
 	
