@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.empresa.entity.Empresa;
 import com.empresa.service.EmpresaService;
 
-
 @RestController
 @RequestMapping("/rest/empresa")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -39,12 +38,12 @@ public class EmpresaController {
 	
 	
 	
-	@GetMapping("/porNombreLike/{razonSocial}")
+	/*@GetMapping("/porNombreLike/{razonSocial}")
 	@ResponseBody
 	public ResponseEntity<List<Empresa>> listaTodasEmpresasPorRaSocialAndRuc(@PathVariable(name = "razonSocial") String razonSocial){
 		List<Empresa> lista = empresaService.listaEmpresaPorNombreLike(razonSocial+"%");
 		return ResponseEntity.ok(lista);
-	}
+	}*/
 
 	
 	@GetMapping("/porRucRaSocialUbigeoPaisConParametros")
@@ -57,7 +56,7 @@ public class EmpresaController {
 	{		
 		Map<String, Object> salida = new HashMap<String, Object>();
 		try {
-			List<Empresa> lista = empresaService.listaEmpresaPorRaSocialRucUbigeoPais(ruc,"%"+razonSocial+"%",idUbigeo,idPais);
+			List<Empresa> lista = empresaService.listaEmpresaPorRaSocialRucUbigeoPais("%"+razonSocial+"%",ruc,idUbigeo,idPais);
 			if (CollectionUtils.isEmpty(lista)) {
 				salida.put("mensaje","No existe elementos para la consulta");
 				
@@ -72,6 +71,8 @@ public class EmpresaController {
 		
 		return ResponseEntity.ok(salida);
 	}
+	
+	
 	
 	@PostMapping
 	@ResponseBody
