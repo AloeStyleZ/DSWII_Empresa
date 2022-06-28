@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,27 +42,45 @@ public class EmpresaController {
 		return ResponseEntity.ok(lista);
 	}
 	
-	@GetMapping("/porNombre/{nombre}")
+	@GetMapping("/porRaSocial/{raSocial}")
 	@ResponseBody
-	public ResponseEntity<List<Empresa>> listaTodasEmpresasPorNombre(@PathVariable(name = "nombre") String nombre){
-		List<Empresa> lista = empresaService.listaEmpresaPorNombre(nombre+"%");
+	public ResponseEntity<List<Empresa>> listaTodasEmpresasPorRaSocial(@PathVariable(name = "raSocial") String raSocial){
+		List<Empresa> lista = empresaService.listaEmpresaPorRaSocial(raSocial+"%");
 		return ResponseEntity.ok(lista);
 	}
 	
-	@GetMapping("/porNombreRuc/{nombre}/{ruc}")
+	@GetMapping("/porRaSocialRuc/{raSocial}/{ruc}")
 	@ResponseBody
-	public ResponseEntity<List<Empresa>> listaTodasEmpresasPorNombreAndRuc(@PathVariable(name = "nombre") String nombre, @PathVariable(name = "ruc") String ruc){
-		List<Empresa> lista = empresaService.listaEmpresaPorRucAndNombre(ruc, nombre+"%");
+	public ResponseEntity<List<Empresa>> listaTodasEmpresasPorRaSocialAndRuc(@PathVariable(name = "raSocial") String raSocial, @PathVariable(name = "ruc") String ruc){
+		List<Empresa> lista = empresaService.listaEmpresaPorRucAndRaSocial(ruc, raSocial+"%");
 		return ResponseEntity.ok(lista);
 	}
 	
-	@GetMapping("/porNombreOrRuconParametros")
+	
+	@GetMapping("/porRucRaSocialUbigeoPaisConParametros")
 	@ResponseBody
-	public ResponseEntity<List<Empresa>> listaEmpresaRucOrNombre(
-			@RequestParam(name = "nombre", required = false, defaultValue = "") String nombre,
-			@RequestParam(name = "nombre", required = false, defaultValue = "") String ruc){
-		List<Empresa> lista = empresaService.listaEmpresaPorRucOrNombre(ruc, nombre+"%");
-		return ResponseEntity.ok(lista);
+	public ResponseEntity<Map<String, Object>> listaPorRucRaSocialUbigeoConParametros(
+			@RequestParam(name = "raSocial", required = false, defaultValue = "") String raSocial,
+			@RequestParam(name = "ruc", required = false, defaultValue = "") String ruc,
+			@RequestParam(name = "idUbigeo", required = false, defaultValue = "-1") int idUbigeo,
+			@RequestParam(name = "idPais", required = false, defaultValue = "-1") int idPais)
+	{		
+		Map<String, Object> salida = new HashMap<String, Object>();
+		try {
+			List<Empresa> lista = empresaService.listaEmpresaPorRaSocialRucUbigeoPais(ruc,"%"+raSocial+"%",idUbigeo,idPais);
+			if (CollectionUtils.isEmpty(lista)) {
+				salida.put("mensaje","No existe elementos para la consulta");
+				
+			} else {
+				salida.put("lista",lista);
+				salida.put("mensaje","Se tiene "+ lista.size() + " elementos");
+			}
+		} catch (Exception e) {
+			salida.put("mensaje","Error : " + e.getMessage());
+		}
+		
+		
+		return ResponseEntity.ok(salida);
 	}
 	
 	@PostMapping

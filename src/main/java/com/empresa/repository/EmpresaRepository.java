@@ -14,9 +14,11 @@ public interface EmpresaRepository extends JpaRepository<Empresa, Integer>{
 	public List<Empresa> findByNombre(String nombre);
 	
 	//Query JPQL
-	@Query("select e from Empresa e where e.nombre like ?1 and e.dni = ?2")
-	public List<Empresa> listaRucAndNombre(String nombre,String ruc);
+	@Query("select e from Empresa e where e.razonSocial like ?1 and e.ruc like ?2")
+	public List<Empresa> listaRucAndRaSocial(String raSocial,String ruc);
 	
-	@Query("select e from Empresa e where (?1 is '' or e.nombre like ?1) and (?2 is '' or e.dni like ?2)")
-	public List<Empresa> listaRucOrNombre(String nombre,String ruc);
+	//query completo
+	@Query("select e from Empresa e where (?1 is '' or e.razonSocial like ?1) and (?2 is '' or e.ruc like ?2) and (?3 is -1 or e.ubigeo.idUbigeo = ?3) and (?4 is -1 or e.pais.idPais = ?4)")
+	public List<Empresa> listaRaSocialRucUbigeoPais(String raSocial, String dni, int idUbigeo, int idPais);
+
 }
