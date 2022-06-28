@@ -30,18 +30,19 @@ public class EmpresaServiceImpl implements EmpresaService {
 	}
 
 	@Override
-	public List<Empresa> listaEmpresaPorNombre(String nombre) {
-		return repository.findByNombre(nombre);
+	public List<Empresa> listaEmpresaPorRaSocial(String raSocial) {
+		return repository.findByNombre(raSocial);
 	}
 
 	@Override
-	public List<Empresa> listaEmpresaPorRucAndNombre(String nombre, String ruc) {
-		return repository.listaRucAndNombre(nombre, ruc);
+	public List<Empresa> listaEmpresaPorRucAndRaSocial(String raSocial, String ruc) {
+		return repository.listaRucAndRaSocial(raSocial, ruc);
 	}
 	
+	
 	@Override
-	public List<Empresa> listaEmpresaPorRucOrNombre(String nombre, String ruc) {
-		return repository.listaRucAndNombre(nombre, ruc);
+	public List<Empresa> listaEmpresaPorRaSocialRucUbigeoPais(String raSocial, String ruc, int idUbigeo, int idPais) {
+		return repository.listaRaSocialRucUbigeoPais(raSocial, ruc, idUbigeo, idPais);
 	}
 
 }

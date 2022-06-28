@@ -11,8 +11,8 @@ public interface EmpresaService {
 	public abstract Empresa insertaActualizaEmpresa(Empresa obj);
 	
 	public abstract List<Empresa> listaEmpresaPorRuc(String ruc);
-	public abstract List<Empresa> listaEmpresaPorNombre(String nombre);
-	public abstract List<Empresa> listaEmpresaPorRucAndNombre(String nombre, String ruc);
-	public abstract List<Empresa> listaEmpresaPorRucOrNombre(String nombre, String ruc);
+	public abstract List<Empresa> listaEmpresaPorRaSocial(String raSocial);
+	public abstract List<Empresa> listaEmpresaPorRucAndRaSocial(String raSocial, String ruc);
+	public abstract List<Empresa> listaEmpresaPorRaSocialRucUbigeoPais(String raSocial, String ruc, int idUbigeo, int idPais);
 	
 }
