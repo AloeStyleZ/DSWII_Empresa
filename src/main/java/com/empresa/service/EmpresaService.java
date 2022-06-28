@@ -8,8 +8,10 @@ public interface EmpresaService {
 
 	public abstract List<Empresa> listaTodos();
 	
-	public Empresa insertaActualizaEmpresa(Empresa obj);
-	public abstract List<Empresa> listaEmpresaPorRucAndRaSocial(String razonSocial, String ruc);
+	public Empresa insertaEmpresa(Empresa obj);
+	public abstract Empresa insertaActualizaEmpresa(Empresa empresa);
+	
+	public abstract List<Empresa> listaEmpresaPorNombreLike(String razonSocial);
 	public abstract List<Empresa> listaEmpresaPorRaSocialRucUbigeoPais(String razonSocial, String ruc, int idUbigeo, int idPais);
 	
 }
