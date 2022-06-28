@@ -20,15 +20,9 @@ public class EmpresaServiceImpl implements EmpresaService {
 	}
 
 	@Override
-	public Empresa insertaEmpresa(Empresa obj) {
-		return repository.save(obj);
-	}
-
-	@Override
 	public List<Empresa> listaEmpresaPorNombreLike(String razonSocial) {
 		return repository.listaPorNombreLike(razonSocial);
 	}
-	
 	
 	@Override
 	public List<Empresa> listaEmpresaPorRaSocialRucUbigeoPais(String razonSocial, String ruc, int idUbigeo, int idPais) {

@@ -31,15 +31,16 @@ public class CrudEmpresaController {
 	@Autowired
 	private EmpresaService empresaService;
 	
-	@GetMapping("/listaEmpresaPorNombreLike/{nom}")
+	@GetMapping("/listaEmpresaPorNombreLike/{filtro}")
 	@ResponseBody
-	public ResponseEntity<List<Empresa>> listaEmpresaPorNombreLike(@PathVariable("nom") String nom) {
+	public ResponseEntity<List<Empresa>> listaEmpresaPorNombreLike(@PathVariable("filtro") String filtro) {
 		List<Empresa> lista  = null;
 		try {
-			if (nom.equals("todos")) {
+			if (filtro.equals("todos")) {
 				lista = empresaService.listaEmpresaPorNombreLike("%");
 			}else {
-				lista = empresaService.listaEmpresaPorNombreLike("%" + nom + "%");	
+				//con comodin
+				lista = empresaService.listaEmpresaPorNombreLike("%" + filtro + "%");	
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
