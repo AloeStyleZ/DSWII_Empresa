@@ -25,24 +25,14 @@ public class EmpresaServiceImpl implements EmpresaService {
 	}
 
 	@Override
-	public List<Empresa> listaEmpresaPorRuc(String ruc) {
-		return repository.findByRuc(ruc);
-	}
-
-	@Override
-	public List<Empresa> listaEmpresaPorRaSocial(String raSocial) {
-		return repository.findByNombre(raSocial);
-	}
-
-	@Override
-	public List<Empresa> listaEmpresaPorRucAndRaSocial(String raSocial, String ruc) {
-		return repository.listaRucAndRaSocial(raSocial, ruc);
+	public List<Empresa> listaEmpresaPorRucAndRaSocial(String razonSocial, String ruc) {
+		return repository.listaRucAndRaSocial(razonSocial, ruc);
 	}
 	
 	
 	@Override
-	public List<Empresa> listaEmpresaPorRaSocialRucUbigeoPais(String raSocial, String ruc, int idUbigeo, int idPais) {
-		return repository.listaRaSocialRucUbigeoPais(raSocial, ruc, idUbigeo, idPais);
+	public List<Empresa> listaEmpresaPorRaSocialRucUbigeoPais(String razonSocial, String ruc, int idUbigeo, int idPais) {
+		return repository.listaRaSocialRucUbigeoPais(razonSocial, ruc, idUbigeo, idPais);
 	}
 
 }
