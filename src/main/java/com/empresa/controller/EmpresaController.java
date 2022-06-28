@@ -39,29 +39,12 @@ public class EmpresaController {
 	
 	
 	
-	@GetMapping("/porRaSocialRuc/{razonSocial}/{ruc}")
+	@GetMapping("/porNombreLike/{razonSocial}")
 	@ResponseBody
-	public ResponseEntity<List<Empresa>> listaTodasEmpresasPorRaSocialAndRuc(@PathVariable(name = "razonSocial") String razonSocial, @PathVariable(name = "ruc") String ruc){
-		List<Empresa> lista = empresaService.listaEmpresaPorRucAndRaSocial(ruc, razonSocial+"%");
+	public ResponseEntity<List<Empresa>> listaTodasEmpresasPorRaSocialAndRuc(@PathVariable(name = "razonSocial") String razonSocial){
+		List<Empresa> lista = empresaService.listaEmpresaPorNombreLike(razonSocial+"%");
 		return ResponseEntity.ok(lista);
 	}
-	
-	/*@GetMapping("/listaClientePorNombresLike/{filtro}")
-	@ResponseBody
-
-	public ResponseEntity<List<Cliente>> consulta(@PathVariable("filtro")String filtro){
-		List<Cliente> salida = null;
-				try { 
-					if (filtro.equals("todos")) {
-						salida = ClienteService.listaClientePorNombresLike("%");
-					}else {
-					salida = ClienteService.listaClientePorNombresLike("%"+filtro+"%");
-				    }
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				return ResponseEntity.ok(salida);
-	}*/
 
 	
 	@GetMapping("/porRucRaSocialUbigeoPaisConParametros")
