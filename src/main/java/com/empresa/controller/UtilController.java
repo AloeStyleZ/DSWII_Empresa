@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.empresa.entity.Ubigeo;
 import com.empresa.service.UbigeoService;
+import com.empresa.util.AppSettings;
 import com.empresa.entity.Pais;
 import com.empresa.service.PaisService;
 
 @RestController
 @RequestMapping("/rest/util")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = AppSettings.URL_CROSS_ORIGIN)
 public class UtilController {
 
 	@Autowired
@@ -40,13 +41,13 @@ public class UtilController {
 
 	@GetMapping("/listaProvincias/{paramDep}")
 	@ResponseBody
-	public List<String> listaProvincias(@PathVariable("paramDep") String dep) {
-		return ubigeoService.listaProvincias(dep);
+	public List<String> listaProvincias(@PathVariable("paramDep") String departamento) {
+		return ubigeoService.listaProvincias(departamento);
 	}
 
 	@GetMapping("/listaDistritos/{paramDep}/{paramProv}")
 	@ResponseBody
-	public List<Ubigeo> listaDistritos(@PathVariable("paramDep") String dep, @PathVariable("paramProv") String prov) {
-		return ubigeoService.listaDistritos(dep, prov);
+	public List<Ubigeo> listaDistritos(@PathVariable("paramDep") String departamento, @PathVariable("paramProv") String provincia) {
+		return ubigeoService.listaDistritos(departamento, provincia);
 	}
 }
