@@ -83,7 +83,7 @@ public class CrudEmpresaController {
 		}
 		return ResponseEntity.ok(salida);
 	}
-	@DeleteMapping("/eliminaProveedor/{id}")
+	@DeleteMapping("/eliminaEmpresa/{id}")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> eliminaProveedor(@PathVariable("id")int id) {
 		Map<String, Object> salida = new HashMap<>();
