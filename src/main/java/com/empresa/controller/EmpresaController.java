@@ -18,10 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.empresa.entity.Empresa;
 import com.empresa.service.EmpresaService;
+import com.empresa.util.AppSettings;
 
 @RestController
 @RequestMapping("/rest/empresa")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = AppSettings.URL_CROSS_ORIGIN)
 public class EmpresaController {
 	
 	@Autowired

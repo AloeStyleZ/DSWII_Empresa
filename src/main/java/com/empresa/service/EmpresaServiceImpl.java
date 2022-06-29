@@ -1,6 +1,7 @@
 package com.empresa.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,17 @@ public class EmpresaServiceImpl implements EmpresaService {
 	@Override
 	public Empresa insertaActualizaEmpresa(Empresa empresa) {
 		return repository.save(empresa);
+	}
+	
+	@Override
+	public void eliminaEmpresa(int id) {
+		repository.deleteById(id);
+		
+	}
+	
+	@Override
+	public Optional<Empresa> buscaEmpresa(int id) {
+		return repository.findById(id);
 	}
 
 }
